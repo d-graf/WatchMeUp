@@ -60,6 +60,9 @@ figcaption {
     font-size:20px;
 }
 
+input{
+    font-family: BalsamiqSans;
+}
 
 form input{
     width: 100% !important;

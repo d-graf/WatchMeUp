@@ -40,6 +40,17 @@ class UserController
         $view->display();
     }
 
+    public function logout()
+    {
+        $userRepository = new UserRepository();
+
+        $view = new View('user_logout');
+        $view->title = 'Logout';
+        $view->heading = 'Logout';
+        $view->users = $userRepository->readAll();
+        $view->display();
+    }
+
     public function create()
     {
         $view = new View('user_create');
