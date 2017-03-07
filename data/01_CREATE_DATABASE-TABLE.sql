@@ -10,7 +10,7 @@ CREATE TABLE `user` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `username` VARCHAR(30) NOT NULL,
     `email` VARCHAR(30) NOT NULL,
-    `password` VARCHAR(20) NOT NULL
+    `password` VARCHAR(40) NOT NULL
     );
     
 CREATE TABLE `image` (
