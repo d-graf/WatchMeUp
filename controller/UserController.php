@@ -18,6 +18,17 @@ class UserController
         $view->display();
     }
 
+    public function login()
+    {
+        $userRepository = new UserRepository();
+
+        $view = new View('user_login');
+        $view->title = 'Benutzer';
+        $view->heading = 'Benutzer';
+        $view->users = $userRepository->readAll();
+        $view->display();
+    }
+
     public function create()
     {
         $view = new View('user_create');

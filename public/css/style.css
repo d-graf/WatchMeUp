@@ -40,18 +40,46 @@ nav a, nav a:hover{
     padding-top: 61px;
     margin: 0 auto;
 }
+
 .image-row {
     width: 60%;
-    margin: 0 auto;
+    margin: 61px auto 0 auto;
 }
+
 .image-wrapper {
     width: 50%;
     margin: 0 auto;
 }
+
 figure {
     text-align: center;
 }
+
 figcaption {
     text-align: left;
     font-size:20px;
+}
+
+
+form input{
+    width: 100% !important;
+    margin:0 0 20px 0;
+}
+
+form input[type="button"]{
+    float:left;
+    width: 40% !important;
+}
+
+form input[type="submit"]{
+    float:right;
+    width: 40% !important;
+}
+
+h1{
+    text-align: center;
+}
+
+#login{
+    margin-bottom:61px;
 }
