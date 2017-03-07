@@ -50,21 +50,6 @@ class UserRepository extends Repository
         $countRow = 0;
         $query = "SELECT id FROM $this->tableName WHERE username = ? AND password = ?";
 
-        /*$result = mysqli_query(ConnectionHandler::getConnection(), (string)$query);
-
-        if (!$result) {
-            throw new Exception($query->error);
-        }
-
-        while ($row = $result->fetch_assoc()) {
-            $countRow++;
-        }
-
-        if ($countRow == 1) {
-            $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $username;
-        }*/
-
         $statement = ConnectionHandler::getConnection()->prepare($query);
         if (!$statement) {
             throw new Exception(ConnectionHandler::getConnection()->error);
