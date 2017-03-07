@@ -8,15 +8,15 @@ USE `watchmeup`;
 -- Create Table for DB watchmeup
 CREATE TABLE `user` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(30),
-    `email` VARCHAR(30),
-    `password` VARCHAR(20)
+    `username` VARCHAR(30) NOT NULL,
+    `email` VARCHAR(30) NOT NULL,
+    `password` VARCHAR(20) NOT NULL
     );
     
 CREATE TABLE `image` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `title` VARCHAR(10),
-    `image` LONGBLOB,
-    `user_id` INT,
+    `title` VARCHAR(10) NOT NULL,
+    `image` LONGBLOB NOT NULL,
+    `user_id` INT NOT NULL,
     FOREIGN KEY (`user_id`) REFERENCES user(`id`)
 );
