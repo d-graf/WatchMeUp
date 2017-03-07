@@ -11,10 +11,10 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/">WatchMeUp</a></li>
+            <li><a href="">WatchMeUp</a></li>
             <li><a href="">Upload</a></li>
-            <li><a href="/user/login">Login</a></li>
-            <li><a href="/user/logout">Logout</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Logout</a></li>
         </ul>
     </nav>
 </header>
