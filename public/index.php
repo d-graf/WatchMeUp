@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="public/css/style.css"/>
     <title>WatchMeUp</title>
 </head>
 <body>
@@ -22,20 +22,20 @@
     <div class="image-row">
         <div class="image-wrapper">
             <figure>
-                <img src="images/test.jpg"/>
+                <img src="public/images/test.jpg"/>
                 <figcaption>Mein Bild.</figcaption>
             </figure>
         </div>
-        <img src="images/trennlinie.png"/>
+        <img src="public/images/trennlinie.png"/>
     </div>
     <div class="image-row">
         <div class="image-wrapper">
             <figure>
-                <img src="images/test.jpg"/>
+                <img src="public/images/test.jpg"/>
                 <figcaption>Mein Bild.</figcaption>
             </figure>
         </div>
-        <img src="images/trennlinie.png"/>
+        <img src="public/images/trennlinie.png"/>
     </div>
 </div>
 </html>
