@@ -23,8 +23,19 @@ class UserController
         $userRepository = new UserRepository();
 
         $view = new View('user_login');
-        $view->title = 'Benutzer';
-        $view->heading = 'Benutzer';
+        $view->title = 'Login';
+        $view->heading = 'Login';
+        $view->users = $userRepository->readAll();
+        $view->display();
+    }
+
+    public function registration()
+    {
+        $userRepository = new UserRepository();
+
+        $view = new View('user_registration');
+        $view->title = 'Registration';
+        $view->heading = 'Registration';
         $view->users = $userRepository->readAll();
         $view->display();
     }
