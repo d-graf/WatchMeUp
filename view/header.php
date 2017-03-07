@@ -12,9 +12,12 @@
     <nav>
         <ul>
             <li><a href="/">WatchMeUp</a></li>
-            <li><a href="">Upload</a></li>
-            <li><a href="/user/login">Login</a></li>
-            <li><a href="/user/logout">Logout</a></li>
+                <?php if (Security::isLoggedIn()) : ?>
+                    <li><a href="">Upload</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
+                <?php else : ?>
+                    <li><a href="/user">Login</a></li>
+                <?php endif; ?>
         </ul>
     </nav>
 </header>

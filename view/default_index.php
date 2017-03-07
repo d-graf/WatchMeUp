@@ -6,7 +6,9 @@
                 <figcaption>Mein Bild.</figcaption>
             </figure>
         </div>
-        <img src="images/trennlinie.png"/>
+        <div class="line">
+            <div class="mask"></div>
+        </div>
     </div>
     <div class="image-row">
         <div class="image-wrapper">
@@ -15,7 +17,9 @@
                 <figcaption>Mein Bild.</figcaption>
             </figure>
         </div>
-        <img src="images/trennlinie.png"/>
+        <div class="line">
+            <div class="mask"></div>
+        </div>
     </div>
 </div>
 </html>

@@ -18,11 +18,11 @@ class UserController
         $view->display();
     }
 
-    public function create()
+    public function register()
     {
-        $view = new View('user_create');
-        $view->title = 'Benutzer erstellen';
-        $view->heading = 'Benutzer erstellen';
+        $view = new View('user_registration');
+        $view->title = 'Registration';
+        $view->heading = 'Register to WatchMeUp';
         $view->display();
     }
 
@@ -37,21 +37,21 @@ class UserController
         $view->display();
     }
 
-    public function doCreate()
+    public function doRegister()
     {
         if ($_POST['send']) {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
+            $username = $_POST['username'];
             $email = $_POST['email'];
-            // $password  = $_POST['password'];
-            $password = 'no_password';
+            $password  = $_POST['password'];
 
             $userRepository = new UserRepository();
-            $userRepository->create($firstName, $lastName, $email, $password);
+            $userRepository->register($username, $email, $password);
         }
 
         // Anfrage an die URI /user weiterleiten (HTTP 302)
-        header('Location: /user');
+        if ($_SESSION['loggedin'] = true){
+            header('Location: /');
+        }
     }
 
     public function doLogin()
@@ -63,7 +63,7 @@ class UserController
             $userRepository = new UserRepository();
             $userRepository->login($username, $password);
         }
-        if ($_SESSION['loggedin'] = true){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             header('Location: /');
         }
         // Anfrage an die URI /user weiterleiten (HTTP 302)

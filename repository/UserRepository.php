@@ -28,15 +28,15 @@ class UserRepository extends Repository
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
-    public function create($firstName, $lastName, $email, $password)
+    public function register($username, $email, $password)
     {
         $password = sha1($password);
 
-        $query = "INSERT INTO $this->tableName (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO $this->tableName (username, email, password) VALUES (?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
 
-        $statement->bind_param('ssss', $firstName, $lastName, $email, $password);
+        $statement->bind_param('sss', $username, $email, $password);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
@@ -46,9 +46,9 @@ class UserRepository extends Repository
     }
 
     public function login($username, $password){
-        //$password = sha1($password);
-        //$countRow = 0;
-        $query = "SELECT id FROM $this->tableName WHERE username = '$username' AND password = $password";
+        $password = sha1($password);
+        $countRow = 0;
+        $query = "SELECT id FROM $this->tableName WHERE username = ? AND password = ?";
 
         /*$result = mysqli_query(ConnectionHandler::getConnection(), (string)$query);
 
@@ -64,16 +64,25 @@ class UserRepository extends Repository
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
         }*/
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        !$statement->execute();
 
-        $result = $statement->get_result();
-        if (!$result) {
-            throw new Exception($statement->error);
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        if (!$statement) {
+            throw new Exception(ConnectionHandler::getConnection()->error);
         }
 
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
+        $statement->bind_param('ss', $username, $password);
+
+        if(!$statement->execute()) {
+            throw new Exception($statement->error);
+        };
+
+        $result = $statement->get_result();
+        $user = $result->fetch_assoc();
+
+        if ($user['id'] > 0) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $username;
+        }
 
 
     }
