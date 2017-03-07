@@ -2,12 +2,18 @@
     <div class="image-row">
         <div class="image-wrapper">
             <h1 id="login">Login to WatchMeUp</h1>
-            <form action="index.php?action=login" method="post">
-                <input id="name" type="text" name="name" /></p>
-                <input id="password" type="password" name="password"/>
-                <br>
-                <input type="button" value="No Login yet?"/><input type="submit" value="Login"/>
-            </form>
+            <?php
+
+            $form = new Form('/user/doLogin');
+
+            echo $form->text()->name('username')->placeholder('name');
+            echo $form->text()->name('password')->placeholder('password');
+            echo "<input type=\"button\" value=\"No Login yet?\"/>";
+            echo $form->submit()->label('Login')->name('send');
+
+            $form->end();
+
+            ?>
         </div>
     </div>
 </div>
