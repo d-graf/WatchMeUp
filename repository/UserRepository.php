@@ -35,6 +35,7 @@ class UserRepository extends Repository
         $query = "INSERT INTO $this->tableName (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
+
         $statement->bind_param('ssss', $firstName, $lastName, $email, $password);
 
         if (!$statement->execute()) {
@@ -42,5 +43,38 @@ class UserRepository extends Repository
         }
 
         return $statement->insert_id;
+    }
+
+    public function login($username, $password){
+        //$password = sha1($password);
+        //$countRow = 0;
+        $query = "SELECT id FROM $this->tableName WHERE username = '$username' AND password = $password";
+
+        /*$result = mysqli_query(ConnectionHandler::getConnection(), (string)$query);
+
+        if (!$result) {
+            throw new Exception($query->error);
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $countRow++;
+        }
+
+        if ($countRow == 1) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $username;
+        }*/
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        !$statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
+
+
     }
 }

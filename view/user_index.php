@@ -1,19 +1,20 @@
-<article class="hreview open special">
-	<?php if (empty($users)): ?>
-		<div class="dhd">
-			<h2 class="item title">Hoopla! Keine User gefunden.</h2>
-		</div>
-	<?php else: ?>
-		<?php foreach ($users as $user): ?>
-			<div class="panel panel-default">
-				<div class="panel-heading"><?= $user->firstName;?> <?= $user->lastName;?></div>
-				<div class="panel-body">
-					<p class="description">In der Datenbank existiert ein User mit dem Namen <?= $user->firstName;?> <?= $user->lastName;?>. Dieser hat die EMail-Adresse: <a href="mailto:<?= $user->email;?>"><?= $user->email;?></a></p>
-					<p>
-						<a title="Löschen" href="/user/delete?id=<?= $user->id ?>">Löschen</a>
-					</p>
-				</div>
-			</div>
-		<?php endforeach ?>
-	<?php endif ?>
-</article>
+<div id="content">
+    <div class="image-row">
+        <div class="image-wrapper">
+            <h1 id="login">Login to WatchMeUp</h1>
+
+            <?php
+
+            $form = new Form('/user/doLogin');
+
+            echo $form->text()->name('username')->placeholder('name');
+            echo $form->text()->name('password')->placeholder('password');
+            echo "<input type=\"button\" value=\"No Login yet?\"/>";
+            echo $form->submit()->label('Login')->name('send');
+
+            $form->end();
+
+            ?>
+        </div>
+    </div>
+</div>
