@@ -31,6 +31,22 @@ class ImageController
             $image_path = $_FILES['image']['tmp_name'];
             $userid = 1;
             $imageRepository = new ImageRepository();
+
+            $mistakeTitle = $this->validateTitle($title);
+            if($mistakeTitle == false){
+                $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
+            }
+            if($mistakeTitle == false){
+                header('Location: /image/upload');
+                return false;
+            }
+            $imageFileType = pathinfo($image,PATHINFO_EXTENSION);
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                $_SESSION["errorImage"] = '<p style="color:red;">Invalid filetype (filetype must be: jpg, png, jpeg)!</p>';
+                header('Location: /image/upload');
+                return false;
+            }
             if (!$imageRepository->upload($title, $image, $image_path, $userid)){
                 header("Location: /image/upload");
             }else {
@@ -38,10 +54,14 @@ class ImageController
                 setcookie("imageUploaded", $value, time()+ 5);
                 header("Location: /");
             }
-            
-
         }
-
+    }
+    public function validateTitle($title)
+    {
+        if(strlen($title) > 0 && strlen($title)<= 10){
+            return true;
+        }
+        return false;
     }
     public function delete()
     {
