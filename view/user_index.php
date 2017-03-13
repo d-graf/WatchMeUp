@@ -6,7 +6,10 @@
             <?php
 
             $form = new Form('/user/doLogin');
-
+            if(isset($_SESSION["errorLogin"])){
+                echo $_SESSION["errorLogin"];
+                unset($_SESSION['errorLogin']);
+            }
             echo $form->text()->name('username')->placeholder('name')->type('text');
             echo $form->text()->name('password')->placeholder('password')->type('password');
             echo "<input type=\"button\" value=\"No Login yet?\"/ onclick=\"window.location='/user/register';\">";

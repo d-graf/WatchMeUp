@@ -138,6 +138,7 @@ class UserController
             header('Location: /');
         }
         else{
+            $_SESSION["errorLogin"] = '<p style="color:red;">Wrong username or password!</p>';
             header('Location: /user');
         }
         // Anfrage an die URI /user weiterleiten (HTTP 302)
