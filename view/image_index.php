@@ -6,7 +6,7 @@
     ?>
 <?php if (empty($image)): ?>
     <div class="dhd">
-        <h2 class="item title">Hoopla! Keine User gefunden.</h2>
+        <h2 class="item title">Oops! No posts found!</h2>
     </div>
 <?php else: ?>
     <?php foreach ($image as $post): ?>
