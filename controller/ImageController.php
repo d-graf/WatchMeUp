@@ -34,6 +34,8 @@ class ImageController
             if (!$imageRepository->upload($title, $image, $image_path, $userid)){
                 header("Location: /image/upload");
             }else {
+                $value = "uploaded";
+                setcookie("imageUploaded", $value, time()+ 5);
                 header("Location: /");
             }
             
