@@ -43,16 +43,87 @@ class UserController
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password  = $_POST['password'];
+            $confpassword = $_POST['confpassword'];
+
+            $mistakeName = $this->validateName($username);
+            if($mistakeName == false){
+                $_SESSION["errorName"] = '<p style="color:red;">Invalid username!</p>';
+            }
+
+            $mistakeEmail = $this->validateEmail($email);
+            if($mistakeEmail == false){
+                $_SESSION["errorEmail"] = '<p style="color:red;">Invalid Email!</p>';
+            }
+
+            $mistakePw = $this->validatePw($password);
+            if($mistakePw == false){
+                $_SESSION["errorPw"] = '<p style="color:red;">Invalid password!</p>';
+            }
+
+            $mistakeconfPw = $this->confirmPw($confpassword);
+            if($mistakeconfPw == false){
+                $_SESSION["errorconfPw"] = '<p style="color:red;">Not the same password!</p>';
+            }
+
+            if($mistakeName == false){
+                header('Location: /user/register');
+                return false;
+            }if($mistakeEmail == false){
+                header('Location: /user/register');
+                return false;
+            }if($mistakePw == false){
+                header('Location: /user/register');
+                return false;
+            }if($mistakeconfPw == false){
+                header('Location: /user/register');
+                return false;
+            }
 
             $userRepository = new UserRepository();
             $userRepository->register($username, $email, $password);
-        }
 
+        }
         // Anfrage an die URI /user weiterleiten (HTTP 302)
         if ($_SESSION['loggedin'] = true){
             header('Location: /');
         }
     }
+
+    /*Validate functions to validate registration*/
+
+    public function validateName($username)
+    {
+        if(strlen($username) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public function validatePw($password)
+    {
+        if(preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)){
+            return true;
+        }
+        return false;
+    }
+
+    public function confirmPw($confpassword)
+    {
+        if($confpassword == $_POST['password']){
+            return true;
+        }
+        return false;
+    }
+
+    public function validateEmail($email)
+    {
+        if(strlen($email) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    /*--------------------------------------------*/
 
     public function doLogin()
     {
@@ -63,8 +134,11 @@ class UserController
             $userRepository = new UserRepository();
             $userRepository->login($username, $password);
         }
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             header('Location: /');
+        }
+        else{
+            header('Location: /user');
         }
         // Anfrage an die URI /user weiterleiten (HTTP 302)
     }
