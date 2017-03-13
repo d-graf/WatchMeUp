@@ -133,7 +133,7 @@ class Repository
      */
     public function readAll($max = 100)
     {
-        $query = "SELECT * FROM {$this->tableName} LIMIT 0, $max";
+        $query = "SELECT * FROM {$this->tableName} ORDER BY id DESC LIMIT 0, $max";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->execute();
