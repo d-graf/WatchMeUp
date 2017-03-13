@@ -8,7 +8,7 @@ class ImageController
     public function index()
     {
         $imageRepository = new ImageRepository();
-        $view = new View('image_upload');
+        $view = new View('image_index');
         $view->title = 'Upload';
         $view->heading = 'Upload ';
         $view->image = $imageRepository->readAll();
@@ -27,9 +27,18 @@ class ImageController
     {
         if ($_POST['post']) {
             $title = $_POST['title'];
-            $image = $_POST['image'];
+            $image = $_FILES['image']['name'];
+            $image_path = $_FILES['image']['tmp_name'];
+            $userid = 1;
             $imageRepository = new ImageRepository();
-            $imageRepository->upload($title, $image);
+            if (!$imageRepository->upload($title, $image, $image_path, $userid)){
+                header("Location: /image/upload");
+            }else {
+                header("Location: /");
+            }
+            
+
         }
+
     }
 }
