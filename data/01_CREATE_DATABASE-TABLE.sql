@@ -10,7 +10,8 @@ CREATE TABLE `user` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `username` VARCHAR(30) NOT NULL,
     `email` VARCHAR(30) NOT NULL,
-    `password` VARCHAR(40) NOT NULL
+    `password` VARCHAR(40) NOT NULL,
+    `isAdmin` TINYINT DEFAULT 0;
     );
     
 CREATE TABLE `image` (
@@ -20,3 +21,6 @@ CREATE TABLE `image` (
     `user_id` INT NOT NULL,
     FOREIGN KEY (`user_id`) REFERENCES user(`id`)
 );
+
+
+INSERT INTO `user` (`username`, `email`, `password`, `isAdmin`) VALUES ('admin', 'admin@watchmeup.ch', '8cbe11587720206616ffffaa320cd25bf5dc2553', '1');

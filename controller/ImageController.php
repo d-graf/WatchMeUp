@@ -43,4 +43,12 @@ class ImageController
         }
 
     }
+    public function delete()
+    {
+        $imageRepository = new ImageRepository();
+        $imageRepository->deleteById($_GET['id']);
+
+        // Anfrage an die URI /user weiterleiten (HTTP 302)
+        header('Location: '. $_SERVER["HTTP_REFERER"]);
+    }
 }

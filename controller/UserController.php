@@ -150,6 +150,6 @@ class UserController
         $userRepository->deleteById($_GET['id']);
 
         // Anfrage an die URI /user weiterleiten (HTTP 302)
-        header('Location: /user');
+        header('Location: '. $_SERVER["HTTP_REFERER"]);
     }
 }
