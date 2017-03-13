@@ -48,7 +48,7 @@ nav a, nav a:hover{
 }
 
 .image-wrapper {
-    width: 50%;
+    width: 58%;
     margin: 0 auto 61px;
 }
 
@@ -109,4 +109,31 @@ h1{
 
 .warning {
     display: none;
+}
+
+#logo{
+    width:100px;
+}
+
+.image_upload_message{
+    height:30px;
+    width:auto;
+    border:1px solid green;
+    background-color: darkseagreen;
+    position: absolute;
+    right:0;
+    margin-top:3%;
+    margin-right: 1%;
+}
+
+@media (max-width: 768px) {
+    img{
+        width:100%;
+    }
+    .image-wrapper{
+        width: 100%;
+    }
+    .image-row{
+        width:100%;
+    }
 }

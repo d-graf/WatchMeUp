@@ -68,7 +68,5 @@ class UserRepository extends Repository
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
         }
-
-
     }
 }
