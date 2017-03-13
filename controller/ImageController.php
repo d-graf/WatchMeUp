@@ -58,6 +58,7 @@ class ImageController
     }
     public function validateTitle($title)
     {
+        if(strlen($title) > 0 && strlen($title)<= 10){
             return true;
         }
         return false;
