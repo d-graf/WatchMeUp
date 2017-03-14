@@ -17,7 +17,8 @@ if (!Security::isAdmin()) {
                         <img src="data:application/octet-stream;base64, <?= base64_encode($post->image);?>"/>
                         <figcaption><?= $post->title;?></figcaption>
                     </figure>
-                    <a title="Löschen" href="/image/delete?id=<?= $post->id ?>">Löschen</a>
+                    <a title="Delete" href="/image/delete?id=<?= $post->id ?>">Delete</a> |
+                    <a title="Edit" href="/image/edit?id=<?= $post->id ?>">Edit</a>
                 </div>
                 <hr>
             </div>

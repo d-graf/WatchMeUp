@@ -27,4 +27,15 @@ class ImageRepository extends Repository
         }
         return $statement->insert_id;
     }
+
+    public function editTitleById($newTitle, $id ) {
+
+        $query = "UPDATE {$this->tableName} SET title = ? WHERE id = ?";
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('si', $newTitle, $id);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
 }

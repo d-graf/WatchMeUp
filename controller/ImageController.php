@@ -70,4 +70,43 @@ class ImageController
         // Anfrage an die URI /user weiterleiten (HTTP 302)
         header('Location: '. $_SERVER["HTTP_REFERER"]);
     }
+
+    public function edit()
+    {
+        if(!isset($_GET['id'])){
+            header("Location: /");
+        }
+        $id = $_GET['id'];
+
+        $imageRepository = new ImageRepository();
+        $view = new View('image_edit');
+        $view->title = 'Edit';
+        $view->heading = 'Edit';
+        $view->image = $imageRepository->readById($id);
+        $view->display();
+
+        // Anfrage an die URI /user weiterleiten (HTTP 302)
+        //header('Location: /admin');
+    }
+
+    public function doEdit() {
+        if ($_POST['edit']) {
+            $newTitle = $_POST['newTitle'];
+            $id = $_POST['id'];
+
+            $imageRepository = new ImageRepository();
+
+            $mistakeTitle = $this->validateTitle($newTitle);
+            if($mistakeTitle == false){
+                $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
+            }
+            if($mistakeTitle == false){
+                header('Location: ' . $_SERVER["HTTP_REFERER"]);
+                return false;
+            }
+
+            $imageRepository->editTitleById($newTitle, $id);
+            header("Location: /admin");
+        }
+    }
 }
