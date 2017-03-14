@@ -8,10 +8,18 @@
                 echo $_SESSION["errorName"];
                 unset($_SESSION['errorName']);
             }
+            if(isset($_SESSION["errorexistUsername"])){
+                echo $_SESSION["errorexistUsername"];
+                unset($_SESSION['errorexistUsername']);
+            }
             echo $form->text()->name('username')->placeholder('name')->type('text');
             if(isset($_SESSION["errorEmail"])){
                 echo $_SESSION["errorEmail"];
                 unset($_SESSION['errorEmail']);
+            }
+            if(isset($_SESSION["errorexistEmail"])){
+                echo $_SESSION["errorexistEmail"];
+                unset($_SESSION['errorexistEmail']);
             }
             echo $form->text()->name('email')->placeholder('email')->type('email');
             if(isset($_SESSION["errorPw"])){

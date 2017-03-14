@@ -41,7 +41,9 @@ class UserRepository extends Repository
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
-
+                
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
         return $statement->insert_id;
     }
 

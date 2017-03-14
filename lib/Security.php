@@ -17,7 +17,7 @@ class Security
         return (isset($_SESSION['user'])) ? $_SESSION['user'] : "NOT LOGGED IN";
     }
     public static function isAdmin(){
-        return (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) && $_SESSION['isAdmin'] == 1;
+        return (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1);
     }
 
 }
