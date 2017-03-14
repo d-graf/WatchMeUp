@@ -16,11 +16,8 @@ class Security
     public static function getUsername() {
         return (isset($_SESSION['user'])) ? $_SESSION['user'] : "NOT LOGGED IN";
     }
-    public static function getUserId() {
-        return (isset($_SESSION['userId'])) ? $_SESSION['userId'] : "NOT LOGGED IN";
-    }
     public static function isAdmin(){
-        return (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) && $_SESSION['username'] == 'admin';
+        return (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) && $_SESSION['isAdmin'] == 1;
     }
 
 }
