@@ -67,7 +67,6 @@ class UserRepository extends Repository
         if ($user['id'] > 0) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
-            $_SESSION['userid'] = $user['id'];
             $_SESSION['isAdmin'] = $user['isAdmin'];
         }
     }

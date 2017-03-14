@@ -5,9 +5,9 @@ class ImageRepository extends Repository
 {
     protected $tableName = 'image';
 
-    public function upload($titel, $image, $image_path, $userid)
+    public function upload($titel, $image, $image_path)
     {
-        $query = "INSERT INTO $this->tableName (title, image, user_id) VALUES (?, ?, ?)";
+        $query = "INSERT INTO $this->tableName (title, image) VALUES (?, ?)";
         $statement = ConnectionHandler::getConnection()->prepare($query);
 
         $imageFileType = pathinfo($image,PATHINFO_EXTENSION);
@@ -19,7 +19,7 @@ class ImageRepository extends Repository
         }
 
         $null = NULL;
-        $statement->bind_param('sbi', $titel, $null, $userid);
+        $statement->bind_param('sb', $titel, $null);
         $statement->send_long_data(1, file_get_contents($image_path));
 
         if (!$statement->execute()) {

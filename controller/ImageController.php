@@ -29,7 +29,6 @@ class ImageController
             $title = $_POST['title'];
             $image = $_FILES['image']['name'];
             $image_path = $_FILES['image']['tmp_name'];
-            $userid = $_SESSION['userid'];
             $imageRepository = new ImageRepository();
 
             $mistakeTitle = $this->validateTitle($title);
@@ -47,7 +46,7 @@ class ImageController
                 header('Location: /image/upload');
                 return false;
             }
-            if (!$imageRepository->upload($title, $image, $image_path, $userid)){
+            if (!$imageRepository->upload($title, $image, $image_path)){
                 header("Location: /image/upload");
             }else {
                 $value = "uploaded";
