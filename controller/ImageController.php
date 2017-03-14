@@ -31,6 +31,12 @@ class ImageController
             $image_path = $_FILES['image']['tmp_name'];
             $imageRepository = new ImageRepository();
 
+            /**
+             *
+             * Validations Funktionen werden aufgerufen, falls nicht valide wird eine Session Variable erstellt welche
+             * im image_upload.php aufgerufen wird.
+             *
+             */
             $mistakeTitle = $this->validateTitle($title);
             if($mistakeTitle == false){
                 $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
@@ -39,6 +45,12 @@ class ImageController
                 header('Location: /image/upload');
                 return false;
             }
+            /**
+             *
+             * Validiert ob File ein jpg, jpeg, png oder gif ist
+             * Falls dies der Fall ist wird ein Cookie gesetzt welches im image_upload.php aufgerufen wird.
+             *
+             */
             $imageFileType = pathinfo($image,PATHINFO_EXTENSION);
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
@@ -55,6 +67,11 @@ class ImageController
             }
         }
     }
+    /**
+     * Validiert den Titel des Posts und gibt demnach eine Fehlermeldung zurück
+     *
+     * @param $title Wert für den Titel
+     */
     public function validateTitle($title)
     {
         if(strlen($title) > 0 && strlen($title)<= 10){
@@ -89,6 +106,11 @@ class ImageController
         //header('Location: /admin');
     }
 
+    /**
+     *
+     * Funktion des Admin (Edit), validiert den Titel nach 10 Zeichen und ruft dann editTitleById() auf
+     *
+     */
     public function doEdit() {
         if ($_POST['edit']) {
             $newTitle = $_POST['newTitle'];

@@ -1,22 +1,30 @@
 <?php
 require_once '../lib/Repository.php';
 
+/**
+ * Das ImageRepository ist zuständig für alle Zugriffe auf die Tabelle "image".
+ *
+ * Die Ausführliche Dokumentation zu Repositories findest du in der Repository Klasse.
+ */
 class ImageRepository extends Repository
 {
+    /**
+     * Diese Variable wird von der Klasse Repository verwendet, um generische
+     * Funktionen zur Verfügung zu stellen.
+     */
     protected $tableName = 'image';
-
-    public function upload($titel, $image, $image_path)
+    /**
+     * Uploadet Bild mit dazugehörigem Namen
+     *
+     * @param $titel Wert für die Spalte titel
+     * @param $image_path Wert für die Spalte image
+     *
+     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     */
+    public function upload($titel, $image_path)
     {
         $query = "INSERT INTO $this->tableName (title, image) VALUES (?, ?)";
         $statement = ConnectionHandler::getConnection()->prepare($query);
-
-        $imageFileType = pathinfo($image,PATHINFO_EXTENSION);
-
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            return false;
-        }
 
         $null = NULL;
         $statement->bind_param('sb', $titel, $null);
@@ -27,7 +35,15 @@ class ImageRepository extends Repository
         }
         return $statement->insert_id;
     }
-
+    /**
+     *
+     * Updatet den Titel des Posts
+     *
+     * @param $newTitle Wert für die Spalte title
+     * @param $id Wert für die Spalte id
+     *
+     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     */
     public function editTitleById($newTitle, $id ) {
 
         $query = "UPDATE {$this->tableName} SET title = ? WHERE id = ?";
