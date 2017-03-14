@@ -35,7 +35,7 @@ if (!Security::isAdmin()) {
             <div class="image-row">
                 <div class="image-wrapper">
                     <p><?= $user->username;?></p>
-                    <a title="Löschen" href="/user/delete?id=<?= $user->id ?>">Löschen</a>
+                    <a title="Delete" href="/user/delete?id=<?= $user->id ?>">Delete</a>
                 </div>
             </div>
         <?php endforeach ?>
