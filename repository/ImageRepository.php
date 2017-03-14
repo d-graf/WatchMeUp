@@ -18,16 +18,17 @@ class ImageRepository extends Repository
      *
      * @param $titel Wert für die Spalte titel
      * @param $image_path Wert für die Spalte image
+     * @param $catId Wert für die Spalte cat_id
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
-    public function upload($titel, $image_path)
+    public function upload($titel, $image_path, $catId)
     {
-        $query = "INSERT INTO $this->tableName (title, image) VALUES (?, ?)";
+        $query = "INSERT INTO $this->tableName (title, image, cat_id) VALUES (?, ?, (SELECT id FROM `gallery` WHERE id = ?))";
         $statement = ConnectionHandler::getConnection()->prepare($query);
 
         $null = NULL;
-        $statement->bind_param('sb', $titel, $null);
+        $statement->bind_param('sbi', $titel, $null, $catId);
         $statement->send_long_data(1, file_get_contents($image_path));
 
         if (!$statement->execute()) {

@@ -10,6 +10,13 @@ if (!Security::isLoggedIn()) {
 
             <?php
             $form = new Form('/image/doUpload');
+            echo "<select name='catid'>";
+            foreach ($gallery as $cat) {
+                echo "<option value='$cat->id'>$cat->title</option>";
+            }
+
+            echo "</select>";
+
             if(isset($_SESSION["errorTitle"])){
                 echo $_SESSION["errorTitle"];
                 unset($_SESSION['errorTitle']);

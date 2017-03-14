@@ -1,5 +1,6 @@
 <?php
 require_once '../repository/ImageRepository.php';
+require_once '../repository/GalleryRepository.php';
 /**
  * Siehe Dokumentation im DefaultController.
  */
@@ -17,10 +18,12 @@ class ImageController
     public function upload()
     {
         $imageRepository = new ImageRepository();
+        $galleryRepository = new GalleryRepository();
         $view = new View('image_upload');
         $view->title = 'Upload';
         $view->heading = 'Upload';
         $view->image = $imageRepository->readAll();
+        $view->gallery = $galleryRepository->readAll();
         $view->display();
     }
     public function doUpload()
@@ -29,6 +32,7 @@ class ImageController
             $title = $_POST['title'];
             $image = $_FILES['image']['name'];
             $image_path = $_FILES['image']['tmp_name'];
+            $catId = $_POST['catid'];
             $imageRepository = new ImageRepository();
 
             /**
@@ -58,7 +62,7 @@ class ImageController
                 header('Location: /image/upload');
                 return false;
             }
-            if (!$imageRepository->upload($title, $image, $image_path)){
+            if (!$imageRepository->upload($title, $image_path, $catId)){
                 header("Location: /image/upload");
             }else {
                 $value = "uploaded";
