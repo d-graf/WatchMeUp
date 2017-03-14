@@ -69,8 +69,6 @@ class UserRepository extends Repository
             $_SESSION['username'] = $username;
             $_SESSION['userid'] = $user['id'];
             $_SESSION['isAdmin'] = $user['isAdmin'];
-
-            die($_SESSION['userid'] . $_SESSION['isAdmin']);
         }
     }
 }
