@@ -48,7 +48,7 @@ class UserRepository extends Repository
     public function login($username, $password){
         $password = sha1($password);
         $countRow = 0;
-        $query = "SELECT id FROM $this->tableName WHERE username = ? AND password = ?";
+        $query = "SELECT `id`, `isAdmin` FROM $this->tableName WHERE username = ? AND password = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         if (!$statement) {
@@ -67,6 +67,10 @@ class UserRepository extends Repository
         if ($user['id'] > 0) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
+            $_SESSION['userid'] = $user['id'];
+            $_SESSION['isAdmin'] = $user['isAdmin'];
+
+            die($_SESSION['userid'] . $_SESSION['isAdmin']);
         }
     }
 }

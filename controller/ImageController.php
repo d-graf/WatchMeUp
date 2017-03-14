@@ -29,7 +29,7 @@ class ImageController
             $title = $_POST['title'];
             $image = $_FILES['image']['name'];
             $image_path = $_FILES['image']['tmp_name'];
-            $userid = 1;
+            $userid = $_SESSION['userid'];
             $imageRepository = new ImageRepository();
 
             $mistakeTitle = $this->validateTitle($title);

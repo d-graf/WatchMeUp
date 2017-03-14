@@ -1,3 +1,8 @@
+<?php
+if (!Security::isLoggedIn()) {
+    header("Location: /user");
+}
+?>
 <div id="content">
     <div class="image-row">
         <div class="image-wrapper">

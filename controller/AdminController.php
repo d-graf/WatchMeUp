@@ -1,5 +1,4 @@
 <?php
-require_once '../repository/AdminRepository.php';
 require_once '../repository/UserRepository.php';
 require_once '../repository/ImageRepository.php';
 /**
@@ -22,7 +21,6 @@ class AdminController
         // In diesem Fall möchten wir dem Benutzer die View mit dem Namen
         //   "default_index" rendern. Wie das genau funktioniert, ist in der
         //   View Klasse beschrieben.
-        $adminRepository = new AdminRepository();
         $userRepository = new UserRepository();
         $imageRepository = new ImageRepository();
 

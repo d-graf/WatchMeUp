@@ -1,4 +1,8 @@
-
+<?php
+if (!Security::isAdmin()) {
+    header("Location: /user");
+}
+?>
 <div id="content">
     <h2>Posts</h2>
     <?php if (empty($image)): ?>

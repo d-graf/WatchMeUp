@@ -11,7 +11,7 @@ CREATE TABLE `user` (
     `username` VARCHAR(30) NOT NULL,
     `email` VARCHAR(30) NOT NULL,
     `password` VARCHAR(40) NOT NULL,
-    `isAdmin` TINYINT DEFAULT 0;
+    `isAdmin` TINYINT DEFAULT 0sgit
     );
     
 CREATE TABLE `image` (
