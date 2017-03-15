@@ -89,7 +89,12 @@ class Validate
 
     }
 
-
+    /**
+     * Überprüft den mitgegebenen Wert länger als 0 ist und nicht länger als 10.
+     *
+     * @param $title die Eingabe welche überprüft wird
+     * @return bool true wenn die Validation erfolgreich war
+     */
     public function validateImageTitle($title)
     {
         if(strlen($title) > 0 && strlen($title)<= 10){
