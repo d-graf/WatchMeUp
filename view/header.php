@@ -12,7 +12,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/"><img id="logo" src="/images/logo_watchmeup.png"/></a></li>
+            <li><a href="/"><img id="logo" alt="WatchMeUp Logo" src="/images/logo_watchmeup.png"/></a></li>
                 <?php if (Security::isAdmin()) : ?>
                     <li><a href="/admin">Admin</a></li>
                 <?php endif; ?>

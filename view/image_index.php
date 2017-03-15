@@ -13,7 +13,7 @@
         <div class="image-row">
             <div class="image-wrapper">
                 <figure>
-                    <img src="data:application/octet-stream;base64, <?= base64_encode($post->image);?>"/>
+                    <img alt="<?= $post->title;?>" src="data:application/octet-stream;base64,<?=base64_encode($post->image);?>"/>
                     <figcaption><?= $post->title;?></figcaption>
                 </figure>
             </div>
