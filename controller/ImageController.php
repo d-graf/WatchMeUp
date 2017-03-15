@@ -58,7 +58,7 @@ class ImageController
                 header('Location: /image/upload');
                 return false;
             }
-            if (!$imageRepository->upload($title, $image, $image_path)){
+            if (!$imageRepository->upload($title, $image_path)){
                 header("Location: /image/upload");
             }else {
                 $value = "uploaded";
