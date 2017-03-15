@@ -6,7 +6,7 @@ require_once '../lib/Repository.php';
  *
  * Die Ausführliche Dokumentation zu Repositories findest du in der Repository Klasse.
  */
-class GalleryRepository extends Repository
+class PostGalleryRepository extends Repository
 {
     /**
      * Diese Variable wird von der Klasse Repository verwendet, um generische

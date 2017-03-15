@@ -17,7 +17,7 @@
                     <li><a href="/admin">Admin</a></li>
                 <?php endif; ?>
                 <?php if (Security::isLoggedIn()) : ?>
-                    <li><a href="/image/upload">Upload</a></li>
+                    <li><a href="/post/upload">Upload</a></li>
                     <li><a href="/user/logout">Logout</a></li>
                 <?php else : ?>
                     <li><a href="/user">Login</a></li>

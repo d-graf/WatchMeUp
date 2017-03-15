@@ -13,13 +13,13 @@ if (!Security::isAdmin()) {
                 <div class="image-wrapper">
                     <h1 id="login">Edit Post</h1>
                     <?php
-                    $form = new Form('/image/doEdit');
+                    $form = new Form('/post/doEdit');
                     if(isset($_SESSION["errorTitle"])){
                         echo $_SESSION["errorTitle"];
                         unset($_SESSION['errorTitle']);
                     }
                     echo $form->text()->name('id')->placeholder('id')->type('text')->value($_GET['id']);
-                    echo $form->text()->name('newTitle')->placeholder('title')->type('text')->value($image->title);
+                    echo $form->text()->name('newTitle')->placeholder('title')->type('text')->value($post->title);
                     echo $form->submit()->label('Edit')->name('edit');
                     $form->end();
                     ?>

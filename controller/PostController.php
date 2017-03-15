@@ -1,28 +1,29 @@
 <?php
-require_once '../repository/ImageRepository.php';
-require_once '../repository/GalleryRepository.php';
+
+require_once '../repository/PostImageRepository.php';
+require_once '../repository/PostGalleryRepository.php';
 /**
  * Siehe Dokumentation im DefaultController.
  */
-class ImageController
+class PostController
 {
     public function index()
     {
-        $imageRepository = new ImageRepository();
-        $view = new View('image_index');
+        $imageRepository = new PostImageRepository();
+        $view = new View('post_image_index');
         $view->title = 'Upload';
         $view->heading = 'Upload ';
-        $view->image = $imageRepository->readAll();
+        $view->post = $imageRepository->readAll();
         $view->display();
     }
     public function upload()
     {
-        $imageRepository = new ImageRepository();
-        $galleryRepository = new GalleryRepository();
-        $view = new View('image_upload');
+        $imageRepository = new PostImageRepository();
+        $galleryRepository = new PostGalleryRepository();
+        $view = new View('post_image_upload');
         $view->title = 'Upload';
         $view->heading = 'Upload';
-        $view->image = $imageRepository->readAll();
+        $view->post = $imageRepository->readAll();
         $view->gallery = $galleryRepository->readAll();
         $view->display();
     }
@@ -33,12 +34,11 @@ class ImageController
             $image = $_FILES['image']['name'];
             $image_path = $_FILES['image']['tmp_name'];
             $catId = $_POST['catid'];
-            $imageRepository = new ImageRepository();
-
+            $imageRepository = new PostImageRepository();
             /**
              *
              * Validations Funktionen werden aufgerufen, falls nicht valide wird eine Session Variable erstellt welche
-             * im image_upload.php aufgerufen wird.
+             * im post_image_upload.php aufgerufen wird.
              *
              */
             $mistakeTitle = $this->validateTitle($title);
@@ -52,7 +52,7 @@ class ImageController
             /**
              *
              * Validiert ob File ein jpg, jpeg, png oder gif ist
-             * Falls dies der Fall ist wird ein Cookie gesetzt welches im image_upload.php aufgerufen wird.
+             * Falls dies der Fall ist wird ein Cookie gesetzt welches im post_image_upload.php aufgerufen wird.
              *
              */
             $imageFileType = pathinfo($image,PATHINFO_EXTENSION);
@@ -83,33 +83,21 @@ class ImageController
         }
         return false;
     }
-    public function delete()
-    {
-        $imageRepository = new ImageRepository();
-        $imageRepository->deleteById($_GET['id']);
-
-        // Anfrage an die URI /user weiterleiten (HTTP 302)
-        header('Location: '. $_SERVER["HTTP_REFERER"]);
-    }
-
     public function edit()
     {
         if(!isset($_GET['id'])){
             header("Location: /");
         }
         $id = $_GET['id'];
-
-        $imageRepository = new ImageRepository();
-        $view = new View('image_edit');
+        $imageRepository = new PostImageRepository();
+        $view = new View('post_image_edit');
         $view->title = 'Edit';
         $view->heading = 'Edit';
-        $view->image = $imageRepository->readById($id);
+        $view->post = $imageRepository->readById($id);
         $view->display();
-
         // Anfrage an die URI /user weiterleiten (HTTP 302)
         //header('Location: /admin');
     }
-
     /**
      *
      * Funktion des Admin (Edit), validiert den Titel nach 10 Zeichen und ruft dann editTitleById() auf
@@ -119,9 +107,7 @@ class ImageController
         if ($_POST['edit']) {
             $newTitle = $_POST['newTitle'];
             $id = $_POST['id'];
-
-            $imageRepository = new ImageRepository();
-
+            $imageRepository = new PostImageRepository();
             $mistakeTitle = $this->validateTitle($newTitle);
             if($mistakeTitle == false){
                 $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
@@ -130,9 +116,15 @@ class ImageController
                 header('Location: ' . $_SERVER["HTTP_REFERER"]);
                 return false;
             }
-
             $imageRepository->editTitleById($newTitle, $id);
             header("Location: /admin");
         }
+    }
+    public function delete()
+    {
+        $imageRepository = new PostImageRepository();
+        $imageRepository->deleteById($_GET['id']);
+        // Anfrage an die URI /user weiterleiten (HTTP 302)
+        header('Location: '. $_SERVER["HTTP_REFERER"]);
     }
 }

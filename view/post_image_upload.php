@@ -9,7 +9,7 @@ if (!Security::isLoggedIn()) {
             <h1 id="login">Post on WatchMeUp</h1>
 
             <?php
-            $form = new Form('/image/doUpload');
+            $form = new Form('/post/doUpload');
             echo "<select name='catid'>";
             foreach ($gallery as $cat) {
                 echo "<option value='$cat->id'>$cat->title</option>";
