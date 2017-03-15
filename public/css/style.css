@@ -40,11 +40,16 @@ nav a, nav a:hover{
     width: 70%;
     padding-top: 88px;
     margin: 0 auto;
+    margin-bottom: 122px;
 }
 
 .image-row {
     width: 60%;
     margin: 61px auto 0 auto;
+}
+
+.image-row:last-child > hr{
+    display: none;
 }
 
 .image-wrapper {
@@ -60,6 +65,106 @@ figcaption {
     text-align: left;
     font-size:20px;
 }
+
+/* ONLY ADMIN STYLES*/
+.posts{
+    display:none;
+}
+
+.user{
+    display:none;
+}
+
+.toggle-posts{
+    margin-bottom: 20px;
+}
+
+.toggle-user{
+    margin-bottom: 20px;
+}
+
+.posts .image-row-admin:nth-child(1) {
+    width: 100%;
+    height:50px;
+    border-top:1px solid #6E6E6E;
+}
+
+.image-row-admin {
+    width: 100%;
+    height:50px;
+    border-left:1px solid #6E6E6E;
+    border-right:1px solid #6E6E6E;
+    border-bottom:1px solid #6E6E6E;
+    border-top:none;
+}
+
+.image-wrapper-admin {
+    width: 100%;
+    height: 50px;
+}
+
+.figure-admin img{
+    height: 50px;
+    width: auto;
+    float: left;
+}
+
+.figure-admin {
+    text-align: center;
+    margin: 0;
+}
+
+.figcaption-admin {
+    text-align: left;
+    font-size:16px;
+    display: inline-block;
+    float: left;
+    margin-left:20px;
+    margin-top: 16px;
+}
+
+#links-admin{
+    display: inline-block;
+    margin-left:20px;
+    margin-top: 16px;
+    margin-right: 5px;
+    float: right;
+}
+
+#links-admin a{
+    color: #6E6E6E;
+}
+
+#links-admin a:visited{
+    color: #6E6E6E;
+}
+
+.user .image-row-admin-user:nth-child(1) {
+    width: 100%;
+    height:50px;
+    border-top:1px solid #6E6E6E;
+}
+
+.image-row-admin-user {
+    width: 100%;
+    height:50px;
+    border-left:1px solid #6E6E6E;
+    border-right:1px solid #6E6E6E;
+    border-bottom:1px solid #6E6E6E;
+    border-top:none;
+}
+
+.image-wrapper-admin-user {
+    width: 100%;
+    height: 50px;
+}
+
+.p-admin{
+    display:inline-block;
+    margin-left: 5px;
+}
+
+/* ONLY ADMIN STYLES*/
 
 input {
     font-family: BalsamiqSans;
@@ -122,8 +227,35 @@ h1{
     background-color: darkseagreen;
     position: absolute;
     right:0;
+    padding:10px;
     margin-top:3%;
-    margin-right: 1%;
+    margin-right: 4%;
+}
+
+footer{
+    position: fixed;
+    height: 61px;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #6E6E6E;
+    background-color: white;
+    font-size: 15px;
+}
+
+.left{
+    width:50%;
+    display: inline-block;
+    float: left;
+    margin-top: 22px;
+    text-align: center;
+}
+
+.right{
+    width:50%;
+    display: inline-block;
+    float: right;
+    margin-top: 22px;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -135,5 +267,34 @@ h1{
     }
     .image-row{
         width:100%;
+    }
+    .left{
+        width:50%;
+        display: block;
+        float: left;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .right{
+        width:50%;
+        display: block;
+        float: right;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .figcaption-admin {
+        text-align: left;
+        font-size:16px;
+        display: inline-block;
+        float: left;
+        margin-left:5px;
+        margin-top: 16px;
+    }
+}
+
+@media (max-width: 355px) {
+    #logo{
+        width: 90px;
     }
 }

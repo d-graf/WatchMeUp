@@ -24,6 +24,5 @@ if (!Security::isAdmin()) {
                     $form->end();
                     ?>
                 </div>
-                <hr>
             </div>
 </div>
