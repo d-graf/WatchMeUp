@@ -89,4 +89,14 @@ class Validate
 
     }
 
+
+    public function validateImageTitle($title)
+    {
+        if(strlen($title) > 0 && strlen($title)<= 10){
+            return true;
+        }
+        $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
+        return false;
+    }
+
 }

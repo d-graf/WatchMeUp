@@ -1,5 +1,6 @@
 <?php
 require_once '../repository/ImageRepository.php';
+require_once '../lib/Validate.php';
 /**
  * Siehe Dokumentation im DefaultController.
  */
@@ -37,10 +38,8 @@ class ImageController
              * im image_upload.php aufgerufen wird.
              *
              */
-            $mistakeTitle = $this->validateTitle($title);
-            if($mistakeTitle == false){
-                $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
-            }
+            $validate = new Validate();
+            $mistakeTitle = $validate->validateImageTitle($title);
             if($mistakeTitle == false){
                 header('Location: /image/upload');
                 return false;
@@ -67,18 +66,7 @@ class ImageController
             }
         }
     }
-    /**
-     * Validiert den Titel des Posts und gibt demnach eine Fehlermeldung zurück
-     *
-     * @param $title Wert für den Titel
-     */
-    public function validateTitle($title)
-    {
-        if(strlen($title) > 0 && strlen($title)<= 10){
-            return true;
-        }
-        return false;
-    }
+
     public function delete()
     {
         $imageRepository = new ImageRepository();
@@ -101,9 +89,6 @@ class ImageController
         $view->heading = 'Edit';
         $view->image = $imageRepository->readById($id);
         $view->display();
-
-        // Anfrage an die URI /user weiterleiten (HTTP 302)
-        //header('Location: /admin');
     }
 
     /**
@@ -118,10 +103,9 @@ class ImageController
 
             $imageRepository = new ImageRepository();
 
-            $mistakeTitle = $this->validateTitle($newTitle);
-            if($mistakeTitle == false){
-                $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
-            }
+            $validate = new Validate();
+            $mistakeTitle = $validate->validateImageTitle($newTitle);
+
             if($mistakeTitle == false){
                 header('Location: ' . $_SERVER["HTTP_REFERER"]);
                 return false;
