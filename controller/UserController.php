@@ -1,6 +1,7 @@
 <?php
 
 require_once '../repository/UserRepository.php';
+require_once '../lib/Validate.php';
 
 /**
  * Siehe Dokumentation im DefaultController.
@@ -45,54 +46,21 @@ class UserController
             $password  = $_POST['password'];
             $confpassword = $_POST['confpassword'];
 
-            $mistakeName = $this->validateName($username);
-            if($mistakeName == false){
-                $_SESSION["errorName"] = '<p style="color:red;">Invalid username!</p>';
-            }
+            $validate = new Validate();
 
-            $existUsername = $this->uniqueUsername($username);
-            if($existUsername == false){
-                $_SESSION["errorexistUsername"] = '<p style="color:red;">Username exists already!</p>';
-            }
+            $mistakeName = $validate->validateText($username, "Username");
+            $existUsername = $validate->uniqueValue($username, "Username");
 
-            $mistakeEmail = $this->validateEmail($email);
-            if($mistakeEmail == false){
-                $_SESSION["errorEmail"] = '<p style="color:red;">Invalid Email!</p>';
-            }
+            $mistakeEmail = $validate->validateText($email, "Email");
+            $existEmail = $validate->uniqueValue($email, "Email");
 
-            $existEmail = $this->uniqueEmail($email);
-            if($existEmail == false){
-                $_SESSION["errorexistEmail"] = '<p style="color:red;">Email exists already!</p>';
-            }
+            $mistakePw = $validate->validatePw($password);
+            $mistakeconfPw = $validate->confirmPw($confpassword, $password);
 
-            $mistakePw = $this->validatePw($password);
-            if($mistakePw == false){
-                $_SESSION["errorPw"] = '<p style="color:red;">Invalid password!</p>';
-            }
-
-            $mistakeconfPw = $this->confirmPw($confpassword);
-            if($mistakeconfPw == false){
-                $_SESSION["errorconfPw"] = '<p style="color:red;">Not the same password!</p>';
-            }
-
-            if($mistakeName == false){
+            if($mistakeName == false || $existUsername == false || $mistakeEmail == false || $existEmail == false
+            || $mistakePw == false || $mistakeconfPw == false){
                 header('Location: /user/register');
-                return false;
-            }if($existUsername == false) {
-                header('Location: /user/register');
-                return false;
-            }if($mistakeEmail == false){
-                header('Location: /user/register');
-                return false;
-            }if($existEmail == false) {
-                header('Location: /user/register');
-                return false;
-            }if($mistakePw == false){
-                header('Location: /user/register');
-                return false;
-            }if($mistakeconfPw == false){
-                header('Location: /user/register');
-                return false;
+                return;
             }
 
             $userRepository = new UserRepository();
@@ -104,89 +72,6 @@ class UserController
             header('Location: /');
         }
     }
-
-    /*Validate functions to validate registration*/
-
-    public function validateName($username)
-    {
-        if(strlen($username) > 0){
-            return true;
-        }
-        return false;
-    }
-
-    public function validatePw($password)
-    {
-        if(preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)){
-            return true;
-        }
-        return false;
-    }
-
-    public function confirmPw($confpassword)
-    {
-        if($confpassword == $_POST['password']){
-            return true;
-        }
-        return false;
-    }
-
-    public function validateEmail($email)
-    {
-        if(strlen($email) > 0){
-            return true;
-        }
-        return false;
-    }
-
-    public function uniqueEmail($email) {
-        $userRepository = new UserRepository();
-        $query = "SELECT `id` FROM `user` WHERE email = ?";
-
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        if (!$statement) {
-            throw new Exception(ConnectionHandler::getConnection()->error);
-        }
-
-        $statement->bind_param('s', $email);
-
-        if(!$statement->execute()) {
-            throw new Exception($statement->error);
-        };
-
-        $result = $statement->get_result();
-        $user = $result->fetch_assoc();
-        if($user['id'] == 0){
-            return true;
-        }
-        return false;
-
-    }
-
-    public function uniqueUsername($username) {
-        $userRepository = new UserRepository();
-        $query = "SELECT `id` FROM `user` WHERE `username` = ?";
-
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        if (!$statement) {
-            throw new Exception(ConnectionHandler::getConnection()->error);
-        }
-
-        $statement->bind_param('s', $username);
-
-        if(!$statement->execute()) {
-            throw new Exception($statement->error);
-        };
-
-        $result = $statement->get_result();
-        $user = $result->fetch_assoc();
-        if($user['id'] == 0){
-            return true;
-        }
-        return false;
-
-    }
-    /*--------------------------------------------*/
 
     public function doLogin()
     {
