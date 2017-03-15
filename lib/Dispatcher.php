@@ -56,8 +56,11 @@ class Dispatcher
         //   Achtung! Hier stützt PHP ab, sollte der Controller nicht existieren
         if(file_exists("../controller/$controllerName.php")) {
             require_once "../controller/$controllerName.php";
+            if(!method_exists(new $controllerName(),$method)) {
+                header("location:javascript://history.go(-1)");
+            }
         }else {
-            header("Location: /");
+            header("location:javascript://history.go(-1)");
         }
 
         // Eine neue Instanz des Controllers wird erstellt und die gewünschte

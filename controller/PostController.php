@@ -2,6 +2,7 @@
 
 require_once '../repository/PostImageRepository.php';
 require_once '../repository/PostGalleryRepository.php';
+require_once '../lib/Validate.php';
 /**
  * Siehe Dokumentation im DefaultController.
  */
@@ -41,10 +42,10 @@ class PostController
              * im post_image_upload.php aufgerufen wird.
              *
              */
-            $mistakeTitle = $this->validateTitle($title);
-            if($mistakeTitle == false){
-                $_SESSION["errorTitle"] = '<p style="color:red;">Invalid title!</p>';
-            }
+
+            $validate = new Validate();
+            $mistakeTitle = $validate->validateImageTitle($title);
+
             if($mistakeTitle == false){
                 header('Location: /image/upload');
                 return false;
