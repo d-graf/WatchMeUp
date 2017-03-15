@@ -4,9 +4,9 @@
             <h1 id="login">Register to WatchMeUp</h1>
             <?php
             $form = new Form('/user/doRegister');
-            if(isset($_SESSION["errorName"])){
-                echo $_SESSION["errorName"];
-                unset($_SESSION['errorName']);
+            if(isset($_SESSION["errorUsername"])){
+                echo $_SESSION["errorUsername"];
+                unset($_SESSION['errorUsername']);
             }
             if(isset($_SESSION["errorexistUsername"])){
                 echo $_SESSION["errorexistUsername"];
